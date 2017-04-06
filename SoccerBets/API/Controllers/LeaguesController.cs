@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Domain;
+using Backend.Models;
 
 namespace API.Controllers
 {
     [Authorize]
     public class LeaguesController : ApiController
     {
-        private DataContext db = new DataContext();
+        private DataContextLocal db = new DataContextLocal();
 
         // GET: api/Leagues
         public IQueryable<League> GetLeagues()

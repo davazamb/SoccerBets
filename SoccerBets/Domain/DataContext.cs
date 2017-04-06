@@ -22,5 +22,7 @@ namespace Domain
 
 
         public System.Data.Entity.DbSet<Domain.League> Leagues { get; set; }
+
+        public System.Data.Entity.DbSet<Domain.Team> Teams { get; set; }
     }
 }
