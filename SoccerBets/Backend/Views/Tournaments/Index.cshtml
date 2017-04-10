@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Domain.Team>
+﻿@model IEnumerable<Domain.Tournament>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Teams</h2>
+<h2>Tournaments</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,25 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.League.Name)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Logo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Initials)
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order)
+        </th>
+        <th>
+            # Groups
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.League.Name)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -41,12 +41,18 @@
             }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Initials)
+            @Html.DisplayFor(modelItem => item.IsActive)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeamId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeamId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeamId })
+            @Html.DisplayFor(modelItem => item.Order)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TournamentGroups.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TournamentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TournamentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TournamentId })
         </td>
     </tr>
 }

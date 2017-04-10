@@ -1,0 +1,89 @@
+﻿@model Domain.Tournament
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tournament</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.Logo))
+            {
+                <img src="@Url.Content(Model.Logo)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Tournament", "Edit", new { id = Model.TournamentId }) |
+    @Html.ActionLink("Create Group", "CreateGroup", new { id = Model.TournamentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<h4>Groups</h4>
+@if (Model.TournamentGroups.Count == 0)
+{
+    <h5>No groups registered yet</h5>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TournamentGroups.FirstOrDefault().Tournament.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TournamentGroups.FirstOrDefault().Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.TournamentGroups.OrderBy(g => g.Name))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditGroup", new { id = item.TournamentGroupId }) |
+                    @Html.ActionLink("Details", "DetailsGroup", new { id = item.TournamentGroupId }) |
+                    @Html.ActionLink("Delete", "DeleteGroup", new { id = item.TournamentGroupId }, new { onclick = "return confirm('Are you dure to delete this record');"})
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
