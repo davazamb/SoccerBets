@@ -40,7 +40,7 @@ namespace Domain
 
         //public virtual ICollection<Match> Visitors { get; set; }
 
-        //public virtual ICollection<TournamentTeam> TournamentTeams { get; set; }
+        public virtual ICollection<TournamentTeam> TournamentTeams { get; set; }
 
     }
 }
