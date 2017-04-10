@@ -290,6 +290,8 @@
     <Content Include="Views\TournamentGroups\Index.cshtml" />
     <Content Include="Views\Tournaments\CreateGroup.cshtml" />
     <Content Include="Views\Tournaments\EditGroup.cshtml" />
+    <Content Include="Views\Leagues\CreateTeam.cshtml" />
+    <Content Include="Views\Leagues\EditTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

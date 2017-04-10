@@ -28,7 +28,9 @@ namespace Backend.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tournamentGroup);
+            db.TournamentGroups.Remove(tournamentGroup);
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", tournamentGroup.TournamentId));
         }
         // GET: TournamentGroups/Edit/5
         public async Task<ActionResult> EditGroup(int? id)
