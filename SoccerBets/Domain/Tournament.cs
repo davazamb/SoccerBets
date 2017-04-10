@@ -30,7 +30,7 @@ namespace Domain
 
         public virtual ICollection<TournamentGroup> TournamentGroups { get; set; }
 
-        //public virtual ICollection<Date> Dates { get; set; }
+        public virtual ICollection<Date> Dates { get; set; }
     }
 
 }

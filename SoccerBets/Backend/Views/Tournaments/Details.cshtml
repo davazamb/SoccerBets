@@ -50,40 +50,80 @@
 <p>
     @Html.ActionLink("Edit Tournament", "Edit", new { id = Model.TournamentId }) |
     @Html.ActionLink("Create Group", "CreateGroup", new { id = Model.TournamentId }) |
+    @Html.ActionLink("Create Date", "CreateDate", new { id = Model.TournamentId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-<h4>Groups</h4>
-@if (Model.TournamentGroups.Count == 0)
-{
-    <h5>No groups registered yet</h5>
-}
-else
-{
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TournamentGroups.FirstOrDefault().Tournament.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TournamentGroups.FirstOrDefault().Name)
-            </th>
-            <th></th>
-        </tr>
 
-        @foreach (var item in Model.TournamentGroups.OrderBy(g => g.Name))
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Groups</h4>
+        @if (Model.TournamentGroups.Count == 0)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditGroup", new { id = item.TournamentGroupId }) |
-                    @Html.ActionLink("Details", "DetailsGroup", new { id = item.TournamentGroupId }) |
-                    @Html.ActionLink("Delete", "DeleteGroup", new { id = item.TournamentGroupId }, new { onclick = "return confirm('Are you dure to delete this record');"})
-                </td>
-            </tr>
+            <h5>No groups registered yet</h5>
         }
+        else
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TournamentGroups.FirstOrDefault().Tournament.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TournamentGroups.FirstOrDefault().Name)
+                    </th>
+                    <th></th>
+                </tr>
 
-    </table>
+                @foreach (var item in Model.TournamentGroups.OrderBy(g => g.Name))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditGroup", new { id = item.TournamentGroupId }) |
+                            @Html.ActionLink("Details", "DetailsGroup", new { id = item.TournamentGroupId }) |
+                            @Html.ActionLink("Delete", "DeleteGroup", new { id = item.TournamentGroupId }, new { onclick = "return confirm('Are you dure to delete this record');" })
+                        </td>
+                    </tr>
+                }
 
-}
+            </table>
+        }
+    </div>
+    <div class="col-md-6">
+        <h4>Dates</h4>
+        @if (Model.Dates.Count == 0)
+        {
+            <h5>No dates registered yet</h5>
+        }
+        else
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dates.FirstOrDefault().Name)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Dates.OrderBy(g => g.Name))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditDate", new { id = item.DateId }) |
+                            @Html.ActionLink("Details", "DetailsDate", new { id = item.DateId }) |
+                            @Html.ActionLink("Delete", "DeleteDate", new { id = item.DateId }, new { onclick = "return confirm('Are you dure to delete this record');" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+</div>

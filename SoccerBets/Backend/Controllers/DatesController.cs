@@ -12,113 +12,112 @@ using Domain;
 
 namespace Backend.Controllers
 {
-    [Authorize]
-    public class TournamentGroupsController : Controller
+    public class DatesController : Controller
     {
         private DataContextLocal db = new DataContextLocal();
 
-        // GET: TournamentGroups
+        // GET: Dates
         public async Task<ActionResult> Index()
         {
-            var tournamentGroups = db.TournamentGroups.Include(t => t.Tournament);
-            return View(await tournamentGroups.ToListAsync());
+            var dates = db.Dates.Include(d => d.Tournament);
+            return View(await dates.ToListAsync());
         }
 
-        // GET: TournamentGroups/Details/5
+        // GET: Dates/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TournamentGroup tournamentGroup = await db.TournamentGroups.FindAsync(id);
-            if (tournamentGroup == null)
+            Date date = await db.Dates.FindAsync(id);
+            if (date == null)
             {
                 return HttpNotFound();
             }
-            return View(tournamentGroup);
+            return View(date);
         }
 
-        // GET: TournamentGroups/Create
+        // GET: Dates/Create
         public ActionResult Create()
         {
             ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name");
             return View();
         }
 
-        // POST: TournamentGroups/Create
+        // POST: Dates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TournamentGroupId,Name,TournamentId")] TournamentGroup tournamentGroup)
+        public async Task<ActionResult> Create([Bind(Include = "DateId,Name,TournamentId")] Date date)
         {
             if (ModelState.IsValid)
             {
-                db.TournamentGroups.Add(tournamentGroup);
+                db.Dates.Add(date);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name", tournamentGroup.TournamentId);
-            return View(tournamentGroup);
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name", date.TournamentId);
+            return View(date);
         }
 
-        // GET: TournamentGroups/Edit/5
+        // GET: Dates/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TournamentGroup tournamentGroup = await db.TournamentGroups.FindAsync(id);
-            if (tournamentGroup == null)
+            Date date = await db.Dates.FindAsync(id);
+            if (date == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name", tournamentGroup.TournamentId);
-            return View(tournamentGroup);
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name", date.TournamentId);
+            return View(date);
         }
 
-        // POST: TournamentGroups/Edit/5
+        // POST: Dates/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "TournamentGroupId,Name,TournamentId")] TournamentGroup tournamentGroup)
+        public async Task<ActionResult> Edit([Bind(Include = "DateId,Name,TournamentId")] Date date)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tournamentGroup).State = EntityState.Modified;
+                db.Entry(date).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name", tournamentGroup.TournamentId);
-            return View(tournamentGroup);
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "TournamentId", "Name", date.TournamentId);
+            return View(date);
         }
 
-        // GET: TournamentGroups/Delete/5
+        // GET: Dates/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TournamentGroup tournamentGroup = await db.TournamentGroups.FindAsync(id);
-            if (tournamentGroup == null)
+            Date date = await db.Dates.FindAsync(id);
+            if (date == null)
             {
                 return HttpNotFound();
             }
-            return View(tournamentGroup);
+            return View(date);
         }
 
-        // POST: TournamentGroups/Delete/5
+        // POST: Dates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            TournamentGroup tournamentGroup = await db.TournamentGroups.FindAsync(id);
-            db.TournamentGroups.Remove(tournamentGroup);
+            Date date = await db.Dates.FindAsync(id);
+            db.Dates.Remove(date);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

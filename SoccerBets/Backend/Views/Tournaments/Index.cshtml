@@ -26,6 +26,9 @@
         <th>
             # Groups
         </th>
+        <th>
+            # Dates
+        </th>
         <th></th>
     </tr>
 
@@ -48,6 +51,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TournamentGroups.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dates.Count)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TournamentId }) |

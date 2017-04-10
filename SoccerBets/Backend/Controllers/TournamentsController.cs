@@ -17,6 +17,99 @@ namespace Backend.Controllers
     public class TournamentsController : Controller
     {
         private DataContextLocal db = new DataContextLocal();
+
+        public async Task<ActionResult> DeleteDate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Date date = await db.Dates.FindAsync(id);
+            if (date == null)
+            {
+                return HttpNotFound();
+            }
+            db.Dates.Remove(date);
+            await db.SaveChangesAsync();
+            return RedirectToAction(string.Format("Details/{0}", date.TournamentId));
+        }
+
+        // GET: Dates/Edit/5
+        public async Task<ActionResult> EditDate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Date date = await db.Dates.FindAsync(id);
+            if (date == null)
+            {
+                return HttpNotFound();
+            }
+            return View(date);
+        }
+
+        // POST: Dates/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditDate(Date date)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(date).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", date.TournamentId));
+            }
+
+            return View(date);
+        }
+
+        // GET: Dates/Create
+        public async Task<ActionResult> CreateDate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tournament tournament = await db.Tournaments.FindAsync(id);
+            if (tournament == null)
+            {
+                return HttpNotFound();
+            }
+            var view = new Date { TournamentId = tournament.TournamentId, };
+            return View(view);
+        }
+
+        // POST: Dates/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateDate(Date date)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Dates.Add(date);
+                await db.SaveChangesAsync();
+                return RedirectToAction(string.Format("Details/{0}", date.TournamentId));
+            }                                                                                                
+            return View(date);
+        }
+        public async Task<ActionResult> DetailsGroup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TournamentGroup tournamentGroup = await db.TournamentGroups.FindAsync(id);
+            if (tournamentGroup == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tournamentGroup);
+        }
         public async Task<ActionResult> DeleteGroup(int? id)
         {
             if (id == null)

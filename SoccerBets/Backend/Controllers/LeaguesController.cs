@@ -17,6 +17,20 @@ namespace Backend.Controllers
     public class LeaguesController : Controller
     {
         private DataContext db = new DataContext();
+
+        public async Task<ActionResult> DetailsTeam(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Team team = await db.Teams.FindAsync(id);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+            return View(team);
+        }
         public async Task<ActionResult> DeleteTeam(int? id)
         {
             if (id == null)

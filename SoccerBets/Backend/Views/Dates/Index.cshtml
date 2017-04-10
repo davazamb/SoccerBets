@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Domain.TournamentGroup>
+﻿@model IEnumerable<Domain.Date>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Groups</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TournamentGroupId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TournamentGroupId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TournamentGroupId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.DateId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DateId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DateId })
         </td>
     </tr>
 }
