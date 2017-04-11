@@ -190,11 +190,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatesController.cs" />
+    <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaguesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TournamentsController.cs" />
-    <Compile Include="Controllers\TournamentTeamsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +235,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\soccer.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -292,16 +293,13 @@
     <Content Include="Views\Dates\Index.cshtml" />
     <Content Include="Views\Tournaments\CreateDate.cshtml" />
     <Content Include="Views\Tournaments\EditDate.cshtml" />
-    <Content Include="Views\TournamentTeams\Create.cshtml" />
-    <Content Include="Views\TournamentTeams\Delete.cshtml" />
-    <Content Include="Views\TournamentTeams\Details.cshtml" />
-    <Content Include="Views\TournamentTeams\Edit.cshtml" />
-    <Content Include="Views\TournamentTeams\Index.cshtml" />
     <Content Include="Views\Tournaments\CreateTeam.cshtml" />
+    <Content Include="Views\Tournaments\EditTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Logos\" />
+    <Folder Include="Views\Generic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -22,6 +22,7 @@ namespace Backend
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
+                      "~/Scripts/soccer.js",
                       "~/Scripts/fileupload.js"));
 
 
