@@ -10,17 +10,46 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Domain;
+using API.Classes;
+using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
 {
+    [RoutePrefix("api/Users")]
+    [Authorize(Roles = "User")]
     public class UsersController : ApiController
     {
         private DataContext db = new DataContext();
 
+        [HttpPost]
+        [Route("GetUserByEmail")]
+        public async Task<IHttpActionResult> GetUserByEmail(JObject form)
+        {
+            var email = string.Empty;
+            dynamic jsonObject = form;
+
+            try
+            {
+                email = jsonObject.Email.Value;
+            }
+            catch
+            {
+                return BadRequest("Incorrect call");
+            }
+
+            var user = await db.Users.Where(u => u.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userResponse = ToUserResponse(user);
+            return Ok(userResponse);
+        }
+
         // GET: api/Users
         public IQueryable<User> GetUsers()
-        {
-            db.Configuration.ProxyCreationEnabled = false;
+        {   
             return db.Users;
         }
 
@@ -34,7 +63,29 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return Ok(user);
+            var userResponse = ToUserResponse(user);
+            return Ok(userResponse);
+        }
+
+        private UserResponse ToUserResponse(User user)
+        {
+            return new UserResponse
+            {
+                Email= user.Email,
+                FavoriteTeam = user.FavoriteTeam,
+                FavoriteTeamId=user.FavoriteTeamId,
+                FirstName=user.FirstName,
+                GroupUsers=user.GroupUsers.ToList(),
+                LastName=user.LastName,
+                NickName = user.NickName,
+                Picture = user.Picture,
+                Points= user.Points,
+                Predictions=user.Predictions.ToList(),
+                UserGroups=user.UserGroups.ToList(),
+                UserId=user.UserId,
+                UserType=user.UserType,
+                UserTypeId=user.UserTypeId,          
+            };
         }
 
         // PUT: api/Users/5

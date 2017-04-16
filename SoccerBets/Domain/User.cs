@@ -27,6 +27,7 @@ namespace Domain
         [Display(Name = "User type")]
         public int UserTypeId { get; set; }
 
+        [JsonIgnore]
         public virtual UserType UserType { get; set; }
 
         [DataType(DataType.ImageUrl)]
