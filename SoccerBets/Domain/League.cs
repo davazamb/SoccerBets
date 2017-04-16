@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,6 +23,7 @@ namespace Domain
         [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Team> Teams { get; set; }
 
     }

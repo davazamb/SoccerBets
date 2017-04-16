@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -43,8 +44,10 @@ namespace Domain
 
         public int Position { get; set; }
 
+        [JsonIgnore]
         public virtual TournamentGroup TournamentGroup { get; set; }
 
+        [JsonIgnore]
         public virtual Team Team { get; set; }
     }
 

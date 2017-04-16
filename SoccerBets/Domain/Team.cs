@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -32,14 +33,19 @@ namespace Domain
         [Index("Team_Initials_LeagueId_Index", IsUnique = true, Order = 2)]
         public int LeagueId { get; set; }
 
+        [JsonIgnore]
         public virtual League League { get; set; }
 
-        //public virtual ICollection<User> Fans { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<User> Fans { get; set; }
 
-        //public virtual ICollection<Match> Locals { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Match> Locals { get; set; }
 
-        //public virtual ICollection<Match> Visitors { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Match> Visitors { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<TournamentTeam> TournamentTeams { get; set; }
 
     }

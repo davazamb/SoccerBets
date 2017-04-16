@@ -13,7 +13,7 @@ using Backend.Helpers;
 
 namespace Backend.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class LeaguesController : Controller
     {
         private DataContext db = new DataContext();
@@ -143,6 +143,7 @@ namespace Backend.Controllers
                 Logo = view.Logo,
                 Name = view.Name,
                 TeamId = view.TeamId,
+                
             };
         }
 
